@@ -1,0 +1,24 @@
+---
+import { getLocaleFromUrl } from '../../utils/get-locale-from-url'
+import { useTranslations } from '../../utils/use-translations'
+import { locales } from '../../locales'
+
+let locale = getLocaleFromUrl(Astro.url)
+let t = useTranslations(locale)
+
+export let getStaticPaths = () =>
+  locales.map(({ code }) => ({ params: { lang: code } }))
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>{t('title')}</h1>
+	</body>
+</html>
